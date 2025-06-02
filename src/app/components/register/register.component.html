@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .container {
+      background: linear-gradient(135deg, #ffffff, #f0f4f8);
+      transition: box-shadow 0.3s ease;
+    }
+    .container:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .form-group input, .form-group select {
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-group input:focus, .form-group select:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .btn-primary {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background-color: #2563eb;
+      transform: scale(1.03);
+    }
+    .login-link a {
+      transition: color 0.3s ease;
+    }
+    .login-link a:hover {
+      color: #1d4ed8;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+      .form-group {
+        margin-bottom: 1.25rem;
+      }
+      .btn-primary {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="container max-w-md mx-auto p-6 rounded-lg shadow-lg my-6">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Register</h2>
+    <div *ngIf="errorMessage" class="alert alert-danger bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">{{ errorMessage }}</div>
+    
+    <form (ngSubmit)="onRegister()">
+      <div class="form-group mb-4">
+        <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
+        <input type="text" id="name" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" [(ngModel)]="registerData.name" name="name" required placeholder="Enter your name">
+      </div>
+      <div class="form-group mb-4">
+        <label for="email" class="block text-gray-700 font-medium mb-2">Email</label>
+        <input type="email" id="email" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" [(ngModel)]="registerData.email" name="email" required placeholder="Enter your email">
+      </div>
+      <div class="form-group mb-4">
+        <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+        <input type="password" id="password" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" [(ngModel)]="registerData.password" name="password" required placeholder="Enter your password">
+      </div>
+      <div class="form-group mb-4">
+        <label for="confirmPassword" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+        <input type="password" id="confirmPassword" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" [(ngModel)]="registerData.confirmPassword" name="confirmPassword" required placeholder="Confirm your password">
+      </div>
+      <div class="form-group mb-4">
+        <label for="role" class="block text-gray-700 font-medium mb-2">Role</label>
+        <select id="role" class="form-control w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none" [(ngModel)]="registerData.role" name="role" required>
+          <option value="student">Student</option>
+          <option value="teacher">Teacher</option>
+          <option value="examiner">Examiner</option>
+          <option value="proctor">Proctor</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary w-full bg-blue-500 text-white py-2 rounded-md font-semibold">Register</button>
+    </form>
+    
+    <p class="login-link text-center mt-4 text-gray-600">Already have an account? <a routerLink="/login" class="text-blue-500 font-medium">Login</a></p>
+  </div>
+</body>
+</html>

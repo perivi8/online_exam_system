@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Header</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .navbar {
+      background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .navbar-brand {
+      transition: color 0.3s ease;
+    }
+    .navbar-brand:hover {
+      color: #dbeafe;
+    }
+    .navbar-menu button, .navbar-menu a {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .navbar-menu button:hover:not(.logout-btn), .navbar-menu a:hover {
+      background-color: #2563eb;
+      transform: scale(1.03);
+    }
+    .logout-btn:hover {
+      background-color: #b91c1c;
+      transform: scale(1.03);
+    }
+    .user-name {
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .user-name:hover {
+      color: #dbeafe;
+    }
+    .user-menu {
+      position: relative;
+    }
+    .logout-btn {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      margin-top: 0.5rem;
+      z-index: 10;
+    }
+    @media (max-width: 640px) {
+      .navbar {
+        flex-direction: column;
+        padding: 0.75rem;
+        align-items: center;
+      }
+      .navbar-menu {
+        margin-top: 0.5rem;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .not-logged-in {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+      .not-logged-in a {
+        flex: 1;
+        text-align: center;
+        padding: 0.5rem;
+      }
+      .user-menu {
+        width: 100%;
+        text-align: center;
+      }
+      .logout-btn {
+        position: static;
+        margin-top: 0.5rem;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <nav class="navbar flex items-center justify-between p-4 text-white">
+    <div class="navbar-brand text-xl font-bold">Online Exam System</div>
+    <div class="navbar-menu flex items-center gap-4">
+      <ng-container *ngIf="user; else notLoggedIn">
+        <div class="user-menu">
+          <i class="fa-solid fa-user user-name"></i>
+          <span class="user-name" (click)="toggleLogout()" style="font-weight: bolder;">{{ user.name }}</span>
+          <button *ngIf="showLogout" class="btn btn-danger logout-btn bg-red-500 text-white py-2 px-4 rounded-md font-semibold" (click)="logout()">Logout</button>
+        </div>
+      </ng-container>
+      <ng-template #notLoggedIn>
+        <div class="not-logged-in">
+          <a routerLink="/login" class="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded-md font-semibold">Login</a>
+          <a routerLink="/register" class="btn btn-secondary bg-gray-500 text-white py-2 px-4 rounded-md font-semibold">Register</a>
+        </div>
+      </ng-template>
+    </div>
+  </nav>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Results</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .container {
+      background: linear-gradient(135deg, #ffffff, #f0f4f8);
+      transition: box-shadow 0.3s ease;
+    }
+    .container:hover {
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+    .table {
+      border-collapse: separate;
+      border-spacing: 0;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .table th, .table td {
+      border: 1px solid #e5e7eb;
+      padding: 0.75rem;
+    }
+    .table th {
+      background-color: #f9fafb;
+      font-weight: 600;
+    }
+    .table tbody tr:hover {
+      background-color: #f1f5f9;
+    }
+    @media (max-width: 640px) {
+      .container {
+        padding: 1rem;
+      }
+      .table {
+        display: block;
+        width: 100%;
+      }
+      .table thead {
+        display: none; /* Hide table headers on mobile */
+      }
+      .table tbody, .table tr, .table td {
+        display: block;
+        width: 100%;
+      }
+      .table tr {
+        margin-bottom: 1rem;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .table td {
+        border: none;
+        padding: 0.5rem 1rem;
+        position: relative;
+        text-align: left;
+      }
+      .table td:before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #374151;
+        display: inline-block;
+        width: 40%;
+        padding-right: 1rem;
+      }
+      .table td:not(:last-child) {
+        border-bottom: 1px solid #e5e7eb;
+      }
+      p {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+  <div class="container max-w-4xl mx-auto p-6 rounded-lg shadow-lg my-6">
+    <h2 class="text-2xl font-bold text-gray-800 text-center mb-6">Exam Results</h2>
+    <div *ngIf="errorMessage" class="alert alert-danger bg-red-100 border border-red-400 text-red-700 px-4 py-2 rounded mb-4">{{ errorMessage }}</div>
+    <table class="table w-full" *ngIf="results.length > 0">
+      <thead>
+        <tr>
+          <th class="text-left text-gray-700">Exam Title</th>
+          <th class="text-left text-gray-700">MCQ Score</th>
+          <th class="text-left text-gray-700">Subjective Marks</th>
+          <th class="text-left text-gray-700">Total Marks</th>
+          <th class="text-left text-gray-700">Rank</th>
+          <th class="text-left text-gray-700">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let result of results">
+          <td data-label="Exam Title">{{ result.title }}</td>
+          <td data-label="MCQ Score">{{ result.submission.mcq_score }}</td>
+          <td data-label="Subjective Marks">{{ result.submission.subjective_marks }}</td>
+          <td data-label="Total Marks">{{ result.submission.total_marks }}</td>
+          <td data-label="Rank">{{ result.submission.rank || 'Not Assigned' }}</td>
+          <td data-label="Status">{{ result.submission.status | titlecase }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p *ngIf="results.length === 0 && !errorMessage" class="text-gray-600 text-center mt-4">No results available.</p>
+  </div>
+</body>
+</html>
