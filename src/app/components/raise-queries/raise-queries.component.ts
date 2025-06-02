@@ -26,7 +26,7 @@ export class RaiseQueriesComponent implements OnInit {
 
   loadExams(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('http://localhost:5000/api/get-exams', { headers }).subscribe({
+    this.http.get('https://one-line-exam-2-3.onrender.com/api/get-exams', { headers }).subscribe({
       next: (response: any) => {
         this.exams = response.filter((exam: any) => exam.submission?.status === 'completed');
       },
@@ -48,7 +48,7 @@ export class RaiseQueriesComponent implements OnInit {
       query_text: this.query.queryText,
       submitted_at: new Date().toISOString()
     };
-    this.http.post('http://localhost:5000/api/raise-query', queryData, { headers }).subscribe({
+    this.http.post('https://one-line-exam-2-3.onrender.com/api/raise-query', queryData, { headers }).subscribe({
       next: () => {
         this.successMessage = 'Query submitted successfully';
         this.query = { examId: '', queryText: '' };

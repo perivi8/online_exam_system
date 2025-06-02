@@ -29,7 +29,7 @@ export class ProctorDashboardComponent implements OnInit {
 
   loadOngoingExams(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('http://localhost:5000/api/get-exams', { headers }).subscribe({
+    this.http.get('https://one-line-exam-2-3.onrender.com/api/get-exams', { headers }).subscribe({
       next: (exams: any) => {
         this.ongoingExams = [];
         exams.forEach((exam: any) => {
@@ -54,7 +54,7 @@ export class ProctorDashboardComponent implements OnInit {
 
   loadMalpracticeLogs(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('http://localhost:5000/api/proctoring-logs', { headers }).subscribe({
+    this.http.get('https://one-line-exam-2-3.onrender.com/api/proctoring-logs', { headers }).subscribe({
       next: (logs: any) => {
         this.malpracticeLogs = logs;
       },
