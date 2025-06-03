@@ -10,21 +10,21 @@ export class ExamService {
   constructor(private http: HttpClient, private authService: AuthService) {}
 
   getExams(): Observable<any> {
-    return this.http.get('https://one-line-exam-2-3.onrender.com/api/get-exams', { headers: this.authService.getAuthHeaders() });
+    return this.http.get('http://localhost:5000/api/get-exams', { headers: this.authService.getAuthHeaders() });
   }
 
   getResults(): Observable<any> {
     const user = this.authService.getCurrentUser();
-    return this.http.get(`https://one-line-exam-2-3.onrender.com/api/get-exams?email=${user.email}`, { headers: this.authService.getAuthHeaders() });
+    return this.http.get(`http://localhost:5000/api/get-exams?email=${user.email}`, { headers: this.authService.getAuthHeaders() });
   }
 
   startExam(examId: string): Observable<any> {
-    return this.http.post(`https://one-line-exam-2-3.onrender.com/api/start-exam/${examId}`, {}, { headers: this.authService.getAuthHeaders() });
+    return this.http.post(`http://localhost:5000/api/start-exam/${examId}`, {}, { headers: this.authService.getAuthHeaders() });
   }
 
   submitExam(examId: string, answers: any[]): Observable<any> {
     const user = this.authService.getCurrentUser();
-    return this.http.post('https://one-line-exam-2-3.onrender.com/api/submit-exam', {
+    return this.http.post('http://localhost:5000/api/submit-exam', {
       exam_id: examId,
       user_email: user.email,
       answers

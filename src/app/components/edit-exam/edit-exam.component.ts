@@ -37,7 +37,7 @@ export class EditExamComponent implements OnInit {
 
   loadExam(examId: string): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get(`https://one-line-exam-2-3.onrender.com/api/get-exams/${examId}`, { headers }).subscribe({
+    this.http.get(`http://localhost:5000/api/get-exams/${examId}`, { headers }).subscribe({
       next: (response: any) => {
         this.examData = {
           title: response.title,
