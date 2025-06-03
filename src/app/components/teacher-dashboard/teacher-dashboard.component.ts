@@ -26,7 +26,7 @@ export class TeacherDashboardComponent implements OnInit {
 
   loadExams(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('https://online-exam-service-back.onrender.comapi/get-exams', { headers }).subscribe({
+    this.http.get('hhttp://localhost:5000/api/get-exams', { headers }).subscribe({
       next: (response: any) => {
         this.exams = response;
       },
@@ -50,7 +50,7 @@ export class TeacherDashboardComponent implements OnInit {
   deleteExam(examId: string): void {
     if (confirm('Are you sure you want to delete this exam?')) {
       const headers = this.authService.getAuthHeaders();
-      this.http.delete(`https://online-exam-service-back.onrender.com/api/delete-exam/${examId}`, { headers }).subscribe({
+      this.http.delete(`http://localhost:5000/api/delete-exam/${examId}`, { headers }).subscribe({
         next: () => {
           this.exams = this.exams.filter(exam => exam.exam_id !== examId);
         },

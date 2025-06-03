@@ -121,7 +121,7 @@ export class CreateExamComponent {
 
     const headers = this.authService.getAuthHeaders();
     console.log('Request Headers:', headers);
-    this.http.post('https://online-exam-service-back.onrender.com/api/create-exam', formData, { headers }).subscribe({
+    this.http.post('http://localhost:5000/api/create-exam', formData, { headers }).subscribe({
       next: (response: any) => {
         this.successMessage = response.message;
         this.errorMessage = '';

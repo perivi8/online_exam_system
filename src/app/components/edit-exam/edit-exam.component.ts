@@ -37,7 +37,7 @@ export class EditExamComponent implements OnInit {
 
   loadExam(examId: string): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get(`https://online-exam-service-back.onrender.com/api/get-exams/${examId}`, { headers }).subscribe({
+    this.http.get(`http://localhost:5000/api/get-exams/${examId}`, { headers }).subscribe({
       next: (response: any) => {
         this.examData = {
           title: response.title,
@@ -115,7 +115,7 @@ export class EditExamComponent implements OnInit {
     }
 
     const headers = this.authService.getAuthHeaders();
-    this.http.patch(`https://online-exam-service-back.onrender.com/api/edit-exam/${this.exam_id}`, formData, { headers }).subscribe({
+    this.http.patch(`http://localhost:5000/api/edit-exam/${this.exam_id}`, formData, { headers }).subscribe({
       next: () => {
         this.successMessage = 'Exam updated successfully!';
         this.errorMessage = '';

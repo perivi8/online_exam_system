@@ -48,7 +48,7 @@ export class RaiseQueriesComponent implements OnInit {
       query_text: this.query.queryText,
       submitted_at: new Date().toISOString()
     };
-    this.http.post('https://online-exam-service-back.onrender.com/api/raise-query', queryData, { headers }).subscribe({
+    this.http.post('http://localhost:5000/api/raise-query', queryData, { headers }).subscribe({
       next: () => {
         this.successMessage = 'Query submitted successfully';
         this.query = { examId: '', queryText: '' };

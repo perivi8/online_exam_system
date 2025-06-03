@@ -52,7 +52,7 @@ export class ExaminerDashboardComponent implements OnInit {
   deleteExam(examId: string): void {
     if (confirm('Are you sure you want to delete this exam?')) {
       const headers = this.authService.getAuthHeaders();
-      this.http.delete(`https://online-exam-service-back.onrender.com/api/delete-exam/${examId}`, { headers }).subscribe({
+      this.http.delete(`http://localhost:5000/api/delete-exam/${examId}`, { headers }).subscribe({
         next: () => {
           this.successMessage = 'Exam deleted successfully';
           this.loadExams();
