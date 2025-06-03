@@ -21,7 +21,7 @@ export class PerformanceReportComponent implements OnInit {
 
   ngOnInit(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('http://localhost:5000/api/get-exams', { headers }).subscribe({
+    this.http.get('https://online-exam-service-back.onrender.com/api/get-exams', { headers }).subscribe({
       next: (response: any) => {
         this.exams = response;
       },
@@ -35,7 +35,7 @@ export class PerformanceReportComponent implements OnInit {
     if (!this.selectedExamId) return;
     this.selectedExam = this.exams.find(exam => exam.exam_id === this.selectedExamId);
     const headers = this.authService.getAuthHeaders();
-    this.http.get(`http://localhost:5000/api/get-submissions/${this.selectedExamId}`, { headers }).subscribe({
+    this.http.get(`https://online-exam-service-back.onrender.com/api/get-submissions/${this.selectedExamId}`, { headers }).subscribe({
       next: (response: any) => {
         this.reportData = response;
       },

@@ -30,7 +30,7 @@ export class EvaluateExamComponent implements OnInit {
 
   loadExams(): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get('http://localhost:5000/api/get-exams', { headers }).subscribe({
+    this.http.get('https://online-exam-service-back.onrender.com/api/get-exams', { headers }).subscribe({
       next: (response: any) => {
         this.exams = response;
       },
@@ -49,7 +49,7 @@ export class EvaluateExamComponent implements OnInit {
       return;
     }
     const headers = this.authService.getAuthHeaders();
-    this.http.get(`http://localhost:5000/api/get-submissions/${this.selectedExamId}`, { headers }).subscribe({
+    this.http.get(`https://online-exam-service-back.onrender.com/api/get-submissions/${this.selectedExamId}`, { headers }).subscribe({
       next: (response: any) => {
         this.submissions = response.filter((sub: any) => sub.status === 'submitted');
       },
@@ -61,7 +61,7 @@ export class EvaluateExamComponent implements OnInit {
 
   evaluateSubmission(submission: any): void {
     const headers = this.authService.getAuthHeaders();
-    this.http.get(`http://localhost:5000/api/get-submission/${submission.exam_id}/${submission.user_email}`, { headers }).subscribe({
+    this.http.get(`https://online-exam-service-back.onrender.com/api/get-submission/${submission.exam_id}/${submission.user_email}`, { headers }).subscribe({
       next: (response: any) => {
         this.selectedSubmission = response;
         this.subjectiveMarks = new Array(response.questions.length).fill(0);
@@ -80,7 +80,7 @@ export class EvaluateExamComponent implements OnInit {
       subjective_marks: this.subjectiveMarks,
       rank: this.rank
     };
-    this.http.post('http://localhost:5000/api/evaluate-exam', payload, { headers }).subscribe({
+    this.http.post('https://online-exam-service-back.onrender.com/api/evaluate-exam', payload, { headers }).subscribe({
       next: () => {
         this.successMessage = 'Evaluation submitted successfully!';
         this.errorMessage = '';

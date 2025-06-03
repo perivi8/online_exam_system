@@ -43,19 +43,19 @@ export class AuthService {
   }
 
   register(data: { name: string; email: string; password: string; role: string }): Observable<any> {
-    return this.http.post('http://localhost:5000/api/register', data);
+    return this.http.post('https://online-exam-service-back.onrender.com/api/register', data);
   }
 
   forgotPassword(email: string): Observable<any> {
-    return this.http.post('http://localhost:5000/api/forgot-password', { email });
+    return this.http.post('https://online-exam-service-back.onrender.com/api/forgot-password', { email });
   }
 
   verifyCode(email: string, code: string): Observable<any> {
-    return this.http.post('http://localhost:5000/api/verify-code', { email, code });
+    return this.http.post('https://online-exam-service-back.onrender.com/api/verify-code', { email, code });
   }
 
   resetPassword(email: string, code: string, newPassword: string): Observable<any> {
-    return this.http.post('http://localhost:5000/api/reset-password', { email, code, newPassword });
+    return this.http.post('https://online-exam-service-back.onrender.com/api/reset-password', { email, code, newPassword });
   }
 
   logout(): void {
